@@ -28,7 +28,10 @@ val copyOpenmpLibs by tasks.registering {
         if (qwenOpenmp.get()) {
             val libomp = fileTree("${sdkDir.get()}/ndk") {
                 include("**/toolchains/llvm/prebuilt/*/lib/clang/*/lib/linux/aarch64/libomp.so")
-            }.singleFile
+            }.files
+                .sortedBy { it.absolutePath }
+                .lastOrNull()
+                ?: error("Android NDK libomp.so was not found for arm64-v8a")
             copy {
                 from(libomp)
                 into(generatedOpenmpJniLibs.get().dir("arm64-v8a"))
