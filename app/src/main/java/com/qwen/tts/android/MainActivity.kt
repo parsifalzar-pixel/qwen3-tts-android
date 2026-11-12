@@ -1592,7 +1592,7 @@ private fun RuntimePanel(
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                listOf(4, 6).forEach { threads ->
+                listOf(4, 6, 8).forEach { threads ->
                     FilterChip(
                         selected = state.selectedCpuThreads == threads,
                         onClick = { onCpuThreadsChange(threads) },
